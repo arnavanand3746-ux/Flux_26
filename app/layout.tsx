@@ -18,6 +18,10 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "FLUX | Built for Students.",
   description: "A high-energy hackathon experience where developers, designers, founders, and problem-solvers come together to build real products.",
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({

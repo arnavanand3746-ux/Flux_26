@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -20,9 +21,7 @@ export function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-sm" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 z-50">
-          <div className="w-10 h-10 bg-mlh-blue rounded flex items-center justify-center">
-            <span className="font-heading font-bold text-white text-xl">F</span>
-          </div>
+          <Image src="/logo.jpg" alt="FLUX Logo" width={40} height={40} className="rounded object-cover" />
           <span className="font-heading font-bold text-2xl tracking-tight text-mlh-blue">
             FLUX
           </span>
