@@ -1,19 +1,7 @@
 import { supabase } from './supabase'
 
 export async function loadPageContent<T>(key: string, defaultVal: T): Promise<T> {
-  // 1. Try localStorage first (instant, no network delay)
-  if (typeof window !== 'undefined') {
-    const local = localStorage.getItem(`flux-page-${key}`)
-    if (local) {
-      try {
-        return JSON.parse(local) as T
-      } catch (e) {
-        console.error(`Error parsing local storage for key ${key}:`, e)
-      }
-    }
-  }
-
-  // 2. Try Supabase with a 3-second timeout to avoid long UI freezes
+  // 1. Try to load from Supabase with a 3-second timeout to avoid long UI freezes
   try {
     const supabasePromise = supabase
       .from('flux_page_contents')
@@ -26,16 +14,24 @@ export async function loadPageContent<T>(key: string, defaultVal: T): Promise<T>
     )
 
     const { data, error } = await Promise.race([supabasePromise, timeoutPromise])
-
+    
     if (!error && data?.content) {
-      // Cache in localStorage for next time
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(`flux-page-${key}`, JSON.stringify(data.content))
-      }
       return data.content as T
     }
   } catch (e) {
     console.warn(`Supabase load failed for key ${key}:`, e)
+  }
+
+  // 2. Try to load from localStorage
+  if (typeof window !== 'undefined') {
+    const local = localStorage.getItem(`flux-page-${key}`)
+    if (local) {
+      try {
+        return JSON.parse(local) as T
+      } catch (e) {
+        console.error(`Error parsing local storage for key ${key}:`, e)
+      }
+    }
   }
 
   // 3. Fall back to default
