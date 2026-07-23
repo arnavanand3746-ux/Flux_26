@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9fafa;
+  --foreground: #1e293b;
+  --mlh-blue: #002b5c;
+  --mlh-red: #ea2745;
+  --mlh-yellow: #f5c400;
+  --mlh-light-blue: #428bca;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-mlh-blue: var(--mlh-blue);
+  --color-mlh-red: var(--mlh-red);
+  --color-mlh-yellow: var(--mlh-yellow);
+  --color-mlh-light-blue: var(--mlh-light-blue);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mlh-light-blue);
+}
+
+/* Utilities */
+.mlh-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 4px 4px 0px rgba(0, 43, 92, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.mlh-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px rgba(0, 43, 92, 0.15);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--mlh-red), var(--mlh-light-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
